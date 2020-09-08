@@ -1,0 +1,52 @@
+SELECT colum_name FROM table_name
+
+# Paths
+database -> query tool # type queries within that database
+schemas -> tables # see tables
+
+# select all from actor table
+SELECT (asterisk)* FROM actor; # select all from actor table
+
+# select first_name, last_name columns from actor table
+SELECT first_name, last_name FROM actor; # select first_name, last_name columns from actor table
+
+# select all from city table
+SELECT * FROM city; # select all from city table
+
+# select first_name, last_name, email columns from customer table
+SELECT first_name, last_name, email FROM customer;
+
+# Return distinct values from a certain column
+SELECT DISTINCT column FROM table;
+
+# Return distinct release year values from film table
+SELECT DISTINCT release_year FROM film;
+
+# Return all distinct values of ratings from film table
+SELECT DISTINCT rating FROM film;
+
+# Return number of rows of certain column
+SELECT COUNT column_name FROM table;
+
+# Return number of distinct rows from certain column
+SELECT COUNT(DISTINCT column_name) FROM table;
+
+# Return number of distinct amount values from payment table
+SELECT COUNT (DISTINCT amount) FROM payment;
+
+# WHERE statement example - ask for name column in table where name value is equal to David
+SELECT name FROM table
+WHERE name = 'David'
+
+# Multiple conditions (selecting rows from name, choice columns from table where name and choice are each equal to David and Red)
+SELECT name, choice FROM table
+WHERE name = 'David' AND choice = 'Red'
+
+# selecting titles from film table where rental rate>4, replacement_cost is greater than or equal to 19.99$, and R-rated.
+SELECT title FROM film
+WHERE rental_rate > 4 AND replacement_cost >= 19.99
+AND rating = 'R';
+
+
+
+
