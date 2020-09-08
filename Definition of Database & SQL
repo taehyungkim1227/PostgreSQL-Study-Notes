@@ -1,0 +1,6 @@
+*Databases- systems that allow users to store & organize data, helpful when dealing with large amounts of data, data integrity,
+handle massive amounts of data, combine datasets, automate steps for re-use
+*Spreadsheets- one time analysis, quick chart, reasonable data size (tabs = tables in database)
+*types of database platforms- PostgreSQL, MySQL, MariaSQL, etc.
+*SQL(Structured Query Language)- language to communicate with our database
+*MOST commands are general SQL
