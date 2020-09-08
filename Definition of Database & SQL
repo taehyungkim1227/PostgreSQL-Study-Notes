@@ -4,3 +4,6 @@ handle massive amounts of data, combine datasets, automate steps for re-use
 *types of database platforms- PostgreSQL, MySQL, MariaSQL, etc.
 *SQL(Structured Query Language)- language to communicate with our database
 *MOST commands are general SQL
+*PostgreSQL - SQL engine that stores data and reads queries and returns information
+*PgAdmin - Graphical User Interface for connecting with PostgreSQL
+*Remember PostgreSQL password
