@@ -1,2 +1,2 @@
 # PostgreSQL-Self-Study-Notes
-This is a self study notebook for learning PostgreSQL.
+This is the self study notebook for learning PostgreSQL.
