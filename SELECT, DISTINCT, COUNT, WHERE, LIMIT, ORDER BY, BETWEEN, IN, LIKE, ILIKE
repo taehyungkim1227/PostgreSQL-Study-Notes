@@ -1,0 +1,129 @@
+SELECT colum_name FROM table_name
+
+# Paths
+database -> query tool # type queries within that database
+schemas -> tables # see tables
+
+# select all from actor table
+SELECT (asterisk)* FROM actor; # select all from actor table
+
+# select first_name, last_name columns from actor table
+SELECT first_name, last_name FROM actor; # select first_name, last_name columns from actor table
+
+# select all from city table
+SELECT * FROM city; # select all from city table
+
+# select first_name, last_name, email columns from customer table
+SELECT first_name, last_name, email FROM customer;
+
+# WARNING: WHEN USING DISTINCT, COUNT(DISTINCT *) IS NOT CORRECT
+# WHEN USING COUNT... USE COUNT (*) WHEN NEEDED
+
+# Return distinct values from a certain column
+SELECT DISTINCT column FROM table;
+
+# Return distinct release year values from film table
+SELECT DISTINCT release_year FROM film;
+
+# Return all distinct values of ratings from film table
+SELECT DISTINCT rating FROM film;
+
+# Return number of rows of certain column
+SELECT COUNT column_name FROM table;
+
+# Return number of distinct rows from certain column
+SELECT COUNT(DISTINCT column_name) FROM table;
+
+# Return number of distinct amount values from payment table
+SELECT COUNT (DISTINCT amount) FROM payment;
+
+# WHERE statement example - ask for name column in table where name value is equal to David
+SELECT name FROM table
+WHERE name = 'David'
+
+# Multiple conditions (selecting rows from name, choice columns from table where name and choice are each equal to David and Red)
+# must use quotes for string
+SELECT name, choice FROM table
+WHERE name = 'David' AND choice = 'Red'
+
+# selecting titles from film table where rental rate>4, replacement_cost is greater than or equal to 19.99$, and R-rated.
+SELECT title FROM film
+WHERE rental_rate > 4 AND replacement_cost >= 19.99
+AND rating = 'R';
+
+# asking for the number of titles that fit the above requirements
+SELECT COUNT(title) FROM film
+WHERE rental_rate > 4 AND replacement_cost >= 19.99
+AND rating = 'R'
+
+# SQL comparison operators
+= equal to
+>, < greater than, less than
+>=, <= greater than equal to, less than equal to
+<>, != not equal to
+
+# Asking for the phone number of the customer that lives on 259 Ipoh Drive
+SELECT phone FROM address
+WHERE address = '259 Ipoh Drive';
+
+# ORDER BY statements
+SELECT column_1, column_2 
+FROM table
+ORDER BY column_1 ASC/DESC
+
+# order by company name(descending), then sales(ascending)
+SELECT company, name, sales FROM tables
+ORDER BY company DESC, sales ASC
+
+# LIMIT statement (select all from payment table and order by descending payment date and top 5 rows, exclude rows where 
+amount is 0)
+SELECT * FROM payment
+WHERE amount != 0
+ORDER BY payment_date DESC
+LIMIT 5;
+
+# Ask for the customer ids of the 10 first customers who paid for the product
+SELECT customer_id FROM payment
+ORDER BY payment_date
+LIMIT 10;
+
+# Ask for the titles and lengths of the top 5 shortest films
+SELECT title, length FROM film
+ORDER BY length ASC
+LIMIT 5;
+
+# BETWEEN(<=, >=)/NOT BETWEEN(<,>) operator
+# Select all rows from payment table where the payment date is between Feb 1st 2007 & Feb 14th 2007 (should check if dates needed are included)
+SELECT * FROM payment
+WHERE payment_date BETWEEN '2007-02-01' AND '2007-02-14'
+
+# IN statement
+# selecting all rows from payment table where amount is NOT either one of 0.99, 1.98, or 1.99
+SELECT * FROM payment
+WHERE amount NOT IN (0.99, 1.98, 1.99);
+
+# selecting all rows from customer table where first name is either one of John, Jake, Julie
+SELECT * FROM customer
+WHERE first_name IN ('John', 'Jake', 'Julie')
+
+# LIKE statement
+# Example) LIKE '_her%' can return Cheryl, Theresa, and Sherri. ILIKE is case insensitive LIKE.
+# NOT LIKE will return the opposite. (NOT included)
+
+# selecting all rows from customer table where first name starts with J and last name starts with S
+SELECT * FROM customer
+WHERE first_name ILIKE 'j%' AND last_name LIKE 'S%';
+
+# selecting all rows from customer table where 'her' is not included in first name and last name doesn't start with B 
+SELECT * FROM customer 
+WHERE first_name NOT LIKE '_her%' AND last_name NOT LIKE 'B%'
+ORDER BY last_name;
+
+
+
+
+
+
+
+
+
