@@ -1,0 +1,93 @@
+# AS statement - rename column, gets executed at the very end of a query
+SELECT column AS new_name
+FROM table
+
+SELECT SUM(column) AS new_name
+FROM table
+
+# rename as net_revenue
+SELECT SUM(amount) AS net_revenue
+FROM payment
+
+# rename as num_transactions
+SELECT COUNT(amount) AS num_transactions
+FROM payment;
+
+# directly rename SUM(amount) as total_spent & filter at the end
+SELECT customer_id, SUM(amount) AS total_spent
+FROM payment
+GROUP BY customer_id
+HAVING SUM(amount) > 100;
+
+# JOIN lets us combine different tables together (think of Venn diagrams... https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/)
+# INNER JOIN will result in set of records that match in both tables (intersection in Venn diagram)
+
+SELECT * FROM TableA
+INNER JOIN TableB
+ON TableA.col_match = TableB.col_match
+
+SELECT payment_id, payment.customer_id, first_name
+FROM payment
+INNER JOIN customer
+ON payment.customer_id = customer.customer.id
+
+# FULL OUTER JOIN (grab everything present in both tables, similar to union of Venn diagram)
+
+SELECT * FROM Registrations
+FULL OUTER JOIN Logins
+ON Registrations.name = Logins.name
+
+# Use FULL OUTER JOIN for select Table A and Table B but exclude intersection
+SELECT * FROM TableA
+FULL OUTER JOIN TableB
+ON TableA.col_match = TableB.col_match
+WHERE TableA.id IS null OR TableB.id IS null
+
+# LEFT OUTER JOIN
+# Vann diagram wise... A and not 'only B'
+SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.col_match = TableB.col_match
+
+# LEFT OUTER JOIN with WHERE... only A, nothing that's included in B
+SELECT * FROM Registrations
+LEFT OUTER JOIN Logins
+ON Registrations.name = Logins.name
+WHERE Logins.log_id IS null   # because Logins.log_id should be null for values only in A
+
+# LEFT OUTER JOIN can be put as just LEFT JOIN
+
+# RIGHT JOIN is same as LEFT JOIN, but tables switched
+# Vann diagram wise... B (including intersection with A)
+SELECT * FROM TableA
+RIGHT OUTER JOIN TableB
+ON TableA.col_match = TableB.col_match
+
+# But, you can use LEFT JOIN to get results of RIGHT JOIN by changing orders
+
+
+
+# UNION statement... pastes together the results
+SELECT column_name1 FROM table1 
+UNION
+SELECT column_name1 FROM table2 
+ORDER BY column_name2
+
+
+# returns emails of customers in California
+SELECT email, district FROM customer
+INNER JOIN address
+ON customer.address_id = address.address_id
+WHERE district = 'California'
+
+
+
+# returns list of movies in which Nick Wahlberg was in 
+SELECT title, first_name, last_name FROM actor
+INNER JOIN film_actor
+ON actor.actor_id = film_actor.actor_id
+INNER JOIN film
+ON film_actor.film_id = film.film_id
+WHERE first_name = 'Nick' AND last_name = 'Wahlberg'
+
+
