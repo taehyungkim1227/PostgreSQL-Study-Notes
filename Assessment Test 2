@@ -1,0 +1,48 @@
+SELECT * FROM cd.facilities;
+
+SELECT name, membercost FROM cd.facilities;
+
+SELECT * FROM cd.facilities
+WHERE membercost > 0
+LIMIT 5;
+
+SELECT name AS facility_name, facid, membercost, monthlymaintenance
+FROM cd.facilities
+WHERE membercost < monthlymaintenance/50 AND membercost > 0;
+
+SELECT * FROM cd.facilities
+WHERE name ILIKE '%tennis%';
+
+SELECT * FROM cd.facilities
+WHERE facid IN (1,5);
+
+SELECT * FROM cd.members
+WHERE joindate >= '2012-09-01';
+
+SELECT DISTINCT surname FROM cd.members
+ORDER BY surname
+LIMIT 10;
+
+SELECT joindate FROM cd.members
+ORDER BY joindate DESC
+LIMIT 1;
+
+SELECT COUNT (*) FROM cd.facilities
+WHERE guestcost >= 10;
+
+SELECT facid, SUM(slots) as Total_slots FROM cd.bookings
+WHERE starttime >= '2012-09-01' AND starttime < '2012-09-30'
+GROUP BY facid
+ORDER BY SUM(slots);
+
+SELECT facid, SUM(slots) FROM cd.bookings
+GROUP BY facid HAVING sum(slots) > 1000;
+
+SELECT cd.bookings.starttime, cd.facilities.name FROM cd.facilities
+INNER JOIN cd.bookings ON cd.bookings.facid = cd.facilities.facid
+WHERE name LIKE 'Tennis%' AND starttime >= '2012-09-21' AND starttime < '2012-09-22'
+ORDER BY cd.bookings.starttime;
+
+SELECT * FROM cd.members
+INNER JOIN cd.bookings ON cd.members.memid = cd.bookings.memid
+WHERE surname = 'Farrell' AND firstname = 'David'
